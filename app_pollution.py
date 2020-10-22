@@ -13,11 +13,18 @@ st.write("Air pollution has become a more and more serious issue and it will exa
 
 #https://academic.oup.com/eurheartj/article/36/2/83/2293343
 
-
-df=pd.read_csv('uspollution_pollution_us_2000_2016.csv')
-df=df.iloc[:,1:]
-df['Date Local']=pd.to_datetime(df['Date Local'])
-df=df.drop(['State Code','County Code','Site Num','Address','NO2 Units','O3 Units','SO2 Units','CO Units'],axis=1)
+def read_data(files):
+    total_df=[]
+    for f in files:
+        df=pd.read_csv(f)
+        df=df.iloc[:,1:]
+        df['Date Local']=pd.to_datetime(df['Date Local'])
+        total_df.append(df)
+        # df=df.drop(['State Code','County Code','Site Num','Address','NO2 Units','O3 Units','SO2 Units','CO Units'],axis=1)
+    df=pd.concat(total_df, axis=0)
+    return df
+files=[f'data/US_pollution_2000_2016_{i}.csv' for i in range(0, 10)]
+df=read_data(files)
 
 df_state=df[['State','Date Local','NO2 AQI','O3 AQI','SO2 AQI','CO AQI']]
 df_state=df_state.dropna().reset_index(drop=True)
