@@ -11,13 +11,14 @@ st.write('Faner Lin, Shuaidong Pan')
 st.write("Air pollution has become a more and more serious issue and it will exacebate climate change. In different studies, it has shown that air pollution could cause different health issues and different air pollutant could be an important simulus for respiratory disease and cardiovascular disease. Air pollution is a mixture of different components, and some of the main pollutants of great concern includes gaseous ozone, nitrogen dioxide, carbon monoxide, and surphur dioxide. The explored dataset contains the recorded the information of four major pollutant for each day from 2000-01-01 to 2016-05-31. Different visualizatiosn are presented to explore the trend of different pollutant over time for different states")
 
 #https://academic.oup.com/eurheartj/article/36/2/83/2293343
-st.write("The unit for measure four different polllutant NO2, SO2, CO, O3 are Parts per million. There are four different measurements:
-         1. Mean: The arithmetic mean of concentration of NO2 within a given day
-         2. AQI: The calculated air quality index of NO2 within a given day
-         3. 1st Max Value: The maximum value obtained for NO2 concentration in a given day
-         4. 1st Max Hour: The hour when the maximum NO2 concentration was recorded in a given day
-         Here we allow exploring first three measurements for all four pollutant over time for different states. 
-         For 1st Max Hour, we present a different visualization to interact with in the later part of our study. ")
+"The unit for measure four different polllutant NO2, SO2, CO, O3 are Parts per million. There are four different measurements:"
+         "1. Mean: The arithmetic mean of concentration of NO2 within a given day"
+#          2. AQI: The calculated air quality index of NO2 within a given day
+#          3. 1st Max Value: The maximum value obtained for NO2 concentration in a given day
+#          4. 1st Max Hour: The hour when the maximum NO2 concentration was recorded in a given day
+#          Here we allow exploring first three measurements for all four pollutant over time for different states. 
+#          For 1st Max Hour, we present a different visualization to interact with in the later part of our study. "
+         
 def read_data(files):
     total_df=[]
     for f in files:
