@@ -7,8 +7,7 @@ from vega_datasets import data
 # import geopandas as gpd
 
 st.title('Air Pollution Study of United States from 2000 to 2016')
-
-
+st.write('Faner Lin, Shuaidong Pan')
 st.write("Air pollution has become a more and more serious issue and it will exacebate climate change. In different studies, it has shown that air pollution could cause different health issues and different air pollutant could be an important simulus for respiratory disease and cardiovascular disease. Air pollution is a mixture of different components, and some of the main pollutants of great concern includes gaseous ozone, nitrogen dioxide, carbon monoxide, and surphur dioxide. The explored dataset contains the recorded the information of four major pollutant for each day from 2000-01-01 to 2016-05-31. Different visualizatiosn are presented to explore the trend of different pollutant over time for different states")
 
 #https://academic.oup.com/eurheartj/article/36/2/83/2293343
@@ -33,13 +32,20 @@ df_state['Year']=pd.to_datetime(df_state['Date Local']).dt.to_period('Y')
 df_state['Year_Month']=pd.to_datetime(df_state['Date Local']).dt.to_period('M')
 
 pollutant_list=['NO2', 'O3', 'CO', 'SO2']
+measurement_list={' Mean':' Mean', ' Air Quality Index (AQI)':' AQI', ' 1st Max Value ':' 1st Max Value']
 state_list=list(df_state.State.value_counts().index)
 
+# graph 1
+measurement_name=st.selectbox(
+    'Select a measurement within a given day ',
+     list(measurement_list.keys()))
 
 pollutant_name=st.selectbox(
     'Select a Pollutant ',
      pollutant_list)
-pollutant=pollutant_name+' AQI'
+
+# pollutant=pollutant_name+' AQI'
+pollutant=pollutant_name+measurement_list[measurement_name]
 
 states = st.multiselect(
      'Select States ',
@@ -72,7 +78,7 @@ def filter_freq(sub_df):
 #         sub_df=sub_df.drop('Year', axis=1)
     else:
         sub_df=sub_df.loc[:,['State', 'Date Local', pollutant]]
-    sub_df.columns=['State', 'Time', 'AQI']
+    sub_df.columns=['State', 'Time', 'Measurement']
     return sub_df
     
 def filter_time(sub_df):
@@ -84,18 +90,15 @@ sub_df=filter_pollutant(sub_df)
 sub_df=filter_freq(sub_df)
 sub_df=filter_time(sub_df)
 
-# sub_df=df_state.melt(id_vars=['State', 'Date Local'], var_name='Pollutant_Type', value_name='AQI')
-
 # graph 1
-st.write(f'Air Quality Index (AQI) for {pollutant_name} over time')
+st.write(f'{measurement_name} for {pollutant_name} over time')
 scatter_chart=st.altair_chart(
     alt.Chart(sub_df,height=350,width=700).mark_line().encode(
         x='Time:T',
-        y='AQI',
+        y='Measurement',
         color='State'
     ).interactive()
 )
-
 # graph 2
 
 def filter_time(sub_df):
