@@ -25,15 +25,11 @@ def read_data(files):
 files=[f'data/US_pollution_2000_2016_{i}.csv' for i in range(0, 10)]
 df=read_data(files)
 
-df_state=df[['State','Date Local','NO2 AQI','O3 AQI','SO2 AQI','CO AQI']]
-df_state=df_state.dropna().reset_index(drop=True)
-# df_state['Date Local']=pd.to_datetime(df_state['Date Local'])
-df_state['Year']=pd.to_datetime(df_state['Date Local']).dt.to_period('Y')
-df_state['Year_Month']=pd.to_datetime(df_state['Date Local']).dt.to_period('M')
+
 
 pollutant_list=['NO2', 'O3', 'CO', 'SO2']
 measurement_list={' Mean':' Mean', ' Air Quality Index (AQI)':' AQI', ' 1st Max Value ':' 1st Max Value'}
-state_list=list(df_state.State.value_counts().index)
+state_list=list(df.State.value_counts().index)
 
 # graph 1
 measurement_name=st.selectbox(
@@ -46,6 +42,7 @@ pollutant_name=st.selectbox(
 
 # pollutant=pollutant_name+' AQI'
 pollutant=pollutant_name+measurement_list[measurement_name]
+
 
 states = st.multiselect(
      'Select States ',
@@ -85,8 +82,14 @@ def filter_time(sub_df):
     sub_df=sub_df[(sub_df['Time']>year_range[0]) & (sub_df['Time']<year_range[1])] 
     return sub_df
 
+
+df_state=df[['State','Date Local',pollutant]]
+df_state=df_state.dropna().reset_index(drop=True)
+df_state['Year']=pd.to_datetime(df_state['Date Local']).dt.to_period('Y')
+df_state['Year_Month']=pd.to_datetime(df_state['Date Local']).dt.to_period('M')
+
 sub_df=filter_state(df_state)
-sub_df=filter_pollutant(sub_df)
+# sub_df=filter_pollutant(sub_df)
 sub_df=filter_freq(sub_df)
 sub_df=filter_time(sub_df)
 
@@ -106,15 +109,12 @@ def filter_time(sub_df):
     return sub_df
 
 source=filter_time(df_state)
-source=source.groupby('State')['NO2 AQI', 'O3 AQI','SO2 AQI','CO AQI'].agg('mean').reset_index()
-source.columns=['state', 'NO2 AQI', 'O3 AQI','SO2 AQI','CO AQI']
+source=source.groupby('State')[pollutant].agg('mean').reset_index()
+source.columns=['state', pollutant]
 
 cur=pd.read_csv('https://vega.github.io/vega-datasets/data/population_engineers_hurricanes.csv')
 source=cur[['state','id']].merge(source, left_on='state', right_on='state', how='left')
 source=source.replace(np.nan, 0)
-# source.drop('state', axis=1, inplace=True)
-# variable_list=['NO2 AQI', 'O3 AQI', 'CO AQI', 'SO2 AQI']
-
 
 highlight = alt.selection_single(on='mouseover', fields=['state'], empty='none')
 states=alt.topo_feature(data.us_10m.url, 'states')
