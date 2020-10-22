@@ -32,7 +32,7 @@ df_state['Year']=pd.to_datetime(df_state['Date Local']).dt.to_period('Y')
 df_state['Year_Month']=pd.to_datetime(df_state['Date Local']).dt.to_period('M')
 
 pollutant_list=['NO2', 'O3', 'CO', 'SO2']
-measurement_list={' Mean':' Mean', ' Air Quality Index (AQI)':' AQI', ' 1st Max Value ':' 1st Max Value']
+measurement_list={' Mean':' Mean', ' Air Quality Index (AQI)':' AQI', ' 1st Max Value ':' 1st Max Value'}
 state_list=list(df_state.State.value_counts().index)
 
 # graph 1
