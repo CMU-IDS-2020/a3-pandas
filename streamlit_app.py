@@ -174,6 +174,9 @@ elif graph=='Pollutants Relationship':
     states = st.sidebar.selectbox(
          'Select States ',
          state_list)
+    year_range2 = st.slider(
+         'Select start day and end day ',
+         datetime.datetime(2000, 1, 1),datetime.datetime(2016, 5, 31), (datetime.datetime(2009, 1, 1), datetime.datetime(2014, 3, 1)),format="MM/DD/YYYY")
     
     def filter_time2(df):
         df=df[(df['Date Local']>=year_range2[0]) & (df['Date Local']<=year_range2[1])] 
