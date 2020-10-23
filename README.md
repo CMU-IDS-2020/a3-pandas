@@ -1,6 +1,6 @@
 # CMU Interactive Data Science Assigment 3
 
-* **Team members**:  Faner Lin and Shuaidong Pan
+* **Team members**:  Faner Lin (fanerl) and Shuaidong Pan (shuaidop)
 * **Online URL**: https://share.streamlit.io/cmu-ids-2020/a3-pandas
 
 ## Instructions
