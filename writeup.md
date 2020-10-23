@@ -22,10 +22,11 @@ TODO: **A rationale for your design decisions.** How did you choose your particu
 
 We provided four types of visual encodings allowing users to explore the U.S air pollution dataset. 
 The unit for measure four different polllutant NO2, SO2, CO, O3 are Parts per million. There are four different measurements for each pollutant:
-  Mean: The arithmetic mean of concentration of NO2 within a given day
-  AQI: The calculated air quality index of NO2 within a given day
-  1st Max Value: The maximum value obtained for NO2 concentration in a given day
-  1st Max Hour: The hour when the maximum NO2 concentration was recorded in a given day
+
+ * Mean: The arithmetic mean of concentration of NO2 within a given day
+ * AQI: The calculated air quality index of NO2 within a given day
+ * 1st Max Value: The maximum value obtained for NO2 concentration in a given day
+ * 1st Max Hour: The hour when the maximum NO2 concentration was recorded in a given day
 
 First interactive graph allows user to select one of the first three measurement, type of pollutant, states, a range of time, and the plotting frequency. For plotting frequency, we offer three different options, yearly, monthly, and daily. The visualization will then provide the aggregated mean of the measurement over the time range given the select plotting frequency for the selected pollutant and measurement. Different colors of line in the plot indicates different states. 
 
