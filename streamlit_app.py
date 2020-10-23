@@ -7,7 +7,7 @@ from vega_datasets import data
 # import geopandas as gpd
 
 
-
+@st.cache
 def read_data(files):
     total_df=[]
     for f in files:
