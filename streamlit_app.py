@@ -182,11 +182,12 @@ elif graph=='Pollutants Relationship':
         df=df[(df['Date Local']>=year_range2[0]) & (df['Date Local']<=year_range2[1])] 
         return df
     
-    sub_df=df.loc[(df.State=='Texas')]
+    sub_df=df.loc[(df.State==states)]
     sub_df=sub_df[['NO2 Mean', 'SO2 Mean', 'CO Mean','O3 Mean', 'City', 'Date Local']]
     sub_df['Year_Month']=pd.to_datetime(sub_df['Date Local']).dt.to_period('M')
     sub_df=sub_df.groupby(['City','Year_Month']).agg('mean').reset_index()
     sub_df['Year_Month']=pd.PeriodIndex(sub_df.Year_Month, freq='M').to_timestamp()
+    sub_df.columns=['City', 'Date Local', 'NO2 Mean', 'SO2 Mean', 'CO Mean','O3 Mean']
     source=filter_time2(sub_df)
     sub_df
     pollutant1=pollutant1+' Mean'
