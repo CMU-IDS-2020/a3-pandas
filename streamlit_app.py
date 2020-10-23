@@ -151,7 +151,7 @@ elif graph=='pollutant change over time':
     highlight = alt.selection_single(on='mouseover', fields=['state'], empty='none')
     states=alt.topo_feature(data.us_10m.url, 'states')
     ## map
-    state_map=alt.Chart(states).mark_geoshape().encode(
+    state_map=alt.Chart(states,title='States Heatmap').mark_geoshape().encode(
         color=alt.condition(highlight, alt.value('yellow'), alt.Color(f'{pollutant}:Q', scale=alt.Scale(scheme='lightorange'))),
         tooltip=['state:N',f'{pollutant}:Q']
     ).transform_lookup(
@@ -204,7 +204,7 @@ elif graph=='pollutants distributions':
 
     city_num=st.sidebar.selectbox(
         f'Select top N {region_type} with highest/lowest mean of concentration pollutants ',
-         list(range(1, 144)))
+         list(range(1, 144)),index=2)
 
     def filter_time2(df):
         df=df[(df['Date Local']>=year_range2[0]) & (df['Date Local']<=year_range2[1])] 
