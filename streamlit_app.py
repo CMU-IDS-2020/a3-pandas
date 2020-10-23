@@ -96,9 +96,9 @@ df_state['Year']=pd.to_datetime(df_state['Date Local']).dt.to_period('Y')
 df_state['Year_Month']=pd.to_datetime(df_state['Date Local']).dt.to_period('M')
 
 sub_df=filter_state(df_state)
-# sub_df=filter_pollutant(sub_df)
 sub_df=filter_freq(sub_df)
 sub_df=filter_time(sub_df)
+sub_df.head()
 
 # graph 1
 st.write(f'{measurement_name} for {pollutant_name} over time')
