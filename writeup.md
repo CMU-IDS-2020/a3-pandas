@@ -21,8 +21,16 @@ The questions user could answer with the application including:
 TODO: **A rationale for your design decisions.** How did you choose your particular visual encodings and interaction techniques? What alternatives did you consider and how did you arrive at your ultimate choices?
 
 We provided four types of visual encodings allowing users to explore the U.S air pollution dataset. 
-First interactive graph allows user to select measurement, type of pollutant, states, and a range of time. The visualization will then provide the mean of the measurement over the time range that is specified with different colors of line indicating different states. 
+The unit for measure four different polllutant NO2, SO2, CO, O3 are Parts per million. There are four different measurements for each pollutant:
+  Mean: The arithmetic mean of concentration of NO2 within a given day
+  AQI: The calculated air quality index of NO2 within a given day
+  1st Max Value: The maximum value obtained for NO2 concentration in a given day
+  1st Max Hour: The hour when the maximum NO2 concentration was recorded in a given day
+
+First interactive graph allows user to select one of the first three measurement, type of pollutant, states, a range of time, and the plotting frequency. For plotting frequency, we offer three different options, yearly, monthly, and daily. The visualization will then provide the aggregated mean of the measurement over the time range given the select plotting frequency for the selected pollutant and measurement. Different colors of line in the plot indicates different states. 
+
 The second visualization is a map that contains the mean of the measurement of the selected pollutant for all the states, a highligher is added to allow user view the detailed value for different states. 
+
 The third visualization intend to allow user explore which states, counties and cities are the highest or lowest measurements for different pollutant. This visual component allow user to choose different geographic entities (state, county, city) and the top N entities with either highest or lowest mean measurements for the selected pollutant. The geographic entities are then sorted by the mean 1st Max Value of the selected pollutant. 
 
 
