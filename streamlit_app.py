@@ -240,7 +240,7 @@ elif graph==3:
          list(df.City.value_counts().index))
         
     max_hour_list=['CO 1st Max Hour', 'O3 1st Max Hour', 'SO2 1st Max Hour','NO2 1st Max Hour']
-    hour_df=df[[region_type]+max_hour_list].melt(id_vars=region_type, var_name='Pollutant Type', value_name='Max Hour Count') 
+    hour_df=time_df[[region_type]+max_hour_list].melt(id_vars=region_type, var_name='Pollutant Type', value_name='Max Hour Count') 
     hour_df=hour_df.loc[hour_df[region_type]==region_name]
     hour_df2=hour_df.groupby([region_type, 'Pollutant Type','Max Hour Count']).size().unstack(fill_value=0)
     hour_df2
