@@ -1,9 +1,10 @@
-# Project name: Air Pollution Study of United States from 2000 to 2016
-
+# Air Pollution Study of United States from 2000 to 2016
+Faner Lin (fanerl), Shuaidong Pan (shuaidop)
 ![A screenshot of your application. Could be a GIF.](screenshot.png)
 
 TODO: Short abstract describing the main goals and how you achieved them.
 
+Air pollution has become a more and more serious issue. In different studies, it has shown that air pollution will exacebate climate change and could cause different health issues. Different air pollutant could be an important simulus for respiratory disease and cardiovascular disease. Air pollution is a mixture of different components, and some of the main pollutants of great concern includes gaseous ozone, nitrogen dioxide, carbon monoxide, and surphur dioxide. The explored dataset contains the recorded the information of four major pollutant, ozone, nitrogen dioxide, carbon monoxide, and surphur dioxide, for each day from 2000-01-01 to 2016-05-31 for different places in U.S. The visualizations presented in the study could help analyzing trends for different pollutants over time for different states and help identifying states, counties, and cities with serious pollution concerns. Additionally, user could select specific city, county, and state to view the max hour of pollutant measurement over selected time range. The the source of the data has been included at the end of the document and the visualizations and the application are created with Altair and Streamlit. For data preprocessing, exploratory analysis and transformation, we use the package numpy and pandas in Python. 
 
 ## Project Goals
 
