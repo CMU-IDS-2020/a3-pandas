@@ -28,16 +28,16 @@ measurement_list={' Mean':' Mean', ' Air Quality Index (AQI)':' AQI', ' 1st Max 
 state_list=list(df.State.value_counts().index)
 
 st.sidebar.title('Tool Bar')
-graph=st.sidebar.selectbox("choose an interactive components", ['Home & Data',1,2,3])
+graph=st.sidebar.selectbox("choose an interactive components", ['Overview','pollutant change over time','pollutants distributions','max hours for pollutants within a day'])
 
 
-if graph=='Home & Data':
+if graph=='Overview':
     st.title('Air Pollution Study of United States from 2000 to 2016')
     st.write('Faner Lin, Shuaidong Pan')
     st.write("Air pollution has become a more and more serious issue and it will exacebate climate change. In different studies, it has shown that air pollution could cause different health issues and different air pollutant could be an important simulus for respiratory disease and cardiovascular disease. Air pollution is a mixture of different components, and some of the main pollutants of great concern includes gaseous ozone, nitrogen dioxide, carbon monoxide, and surphur dioxide. The explored dataset contains the recorded the information of four major pollutant for each day from 2000-01-01 to 2016-05-31. Different visualizatiosn are presented to explore the trend of different pollutant over time for different states")
     st.dataframe(df[:20])
 
-elif graph==1:
+elif graph=='pollutant change over time':
 
 
     #https://academic.oup.com/eurheartj/article/36/2/83/2293343
@@ -74,8 +74,13 @@ elif graph==1:
     year_range = st.slider(
          'Select a range of values',
          datetime.datetime(2000, 1, 1),datetime.datetime(2016, 5, 31), (datetime.datetime(2009, 1, 1), datetime.datetime(2014, 3, 1)),format="MM/DD/YYYY")
-
-
+    col1, col2,col3=st.beta_columns(3)
+    with col1:
+        pass
+    with col2:
+        st.markdown(f'`{str(year_range[0])[:10]}` - `{str(year_range[1])[:10]}`')
+    with col3:
+        pass
     def filter_state(df_state):
         sub_df=df_state.loc[df_state.State.isin(states)]
         return sub_df
@@ -97,7 +102,7 @@ elif graph==1:
         return sub_df
         
     def filter_time(sub_df):
-        sub_df=sub_df[(sub_df['Time']>year_range[0]) & (sub_df['Time']<year_range[1])] 
+        sub_df=sub_df[(sub_df['Time']>=year_range[0]) & (sub_df['Time']<=year_range[1])] 
         return sub_df
 
 
@@ -122,7 +127,7 @@ elif graph==1:
     )
 # graph 2
     def filter_time(sub_df):
-        sub_df=sub_df[(sub_df['Date Local']>year_range[0]) & (sub_df['Date Local']<year_range[1])] 
+        sub_df=sub_df[(sub_df['Date Local']>=year_range[0]) & (sub_df['Date Local']<=year_range[1])] 
         return sub_df
 
     source=filter_time(df_state)
@@ -136,8 +141,8 @@ elif graph==1:
     highlight = alt.selection_single(on='mouseover', fields=['state'], empty='none')
     states=alt.topo_feature(data.us_10m.url, 'states')
     state_map=alt.Chart(states).mark_geoshape().encode(
-        color=alt.condition(highlight, alt.value('yellow'), f'{pollutant}:Q'),
-        tooltip=['state:N',f'{pollutant}:Q'],
+        color=alt.condition(highlight, alt.value('yellow'), alt.Color(f'{pollutant}:Q', scale=alt.Scale(scheme='lightorange'))),
+        tooltip=['state:N',f'{pollutant}:Q']
     ).transform_lookup(
         lookup='id',
         from_=alt.LookupData(source, 'id', [pollutant, 'state'])
@@ -150,7 +155,7 @@ elif graph==1:
     state_map
 
         
-elif graph==2:
+elif graph=='pollutants distributions':
     ## graph3
     st.write('Now we could further investigate the cities with highest pollutants or cities with lowest pollutants')
 
@@ -162,7 +167,13 @@ elif graph==2:
     year_range2 = st.slider(
          'Select start day and end day ',
          datetime.datetime(2000, 1, 1),datetime.datetime(2016, 5, 31), (datetime.datetime(2009, 1, 1), datetime.datetime(2014, 3, 1)),format="MM/DD/YYYY")
-
+    col1, col2,col3=st.beta_columns(3)
+    with col1:
+        pass
+    with col2:
+        st.markdown(f'`{str(year_range2[0])[:10]}` - `{str(year_range2[1])[:10]}`')
+    with col3:
+        pass
     region_type=st.sidebar.selectbox(
         'Check Max Value Hour at level ',
          ['State', 'County','City'], key='region_type')
@@ -176,7 +187,7 @@ elif graph==2:
          list(range(1, 144)))
 
     def filter_time2(df):
-        df=df[(df['Date Local']>year_range2[0]) & (df['Date Local']<year_range2[1])] 
+        df=df[(df['Date Local']>=year_range2[0]) & (df['Date Local']<=year_range2[1])] 
         return df
 
     st.write(f'Top {city_num} {region_type} with highest mean of concentration of {pollutant_name2} within a day')
@@ -209,15 +220,21 @@ elif graph==2:
 
     
 
-elif graph==3:
+elif graph=='max hours for pollutants within a day':
     # graph 5:
     st.write("We could now turn to the counts of hours in a day when the maximum pollutant concentration was recorded in a given day for a given region. ")
     year_range3 = st.slider(
          'Select start day and end day ',
          datetime.datetime(2000, 1, 1),datetime.datetime(2016, 5, 31), (datetime.datetime(2009, 1, 1), datetime.datetime(2014, 3, 1)),format="MM/DD/YYYY", key='yearRange3')
-
+    col1, col2,col3=st.beta_columns(3)
+    with col1:
+        pass
+    with col2:
+        st.markdown(f'`{str(year_range3[0])[:10]}` - `{str(year_range3[1])[:10]}`')
+    with col3:
+        pass
     def filter_time3(df):
-        df=df[(df['Date Local']>year_range3[0]) & (df['Date Local']<year_range3[1])] 
+        df=df[(df['Date Local']>=year_range3[0]) & (df['Date Local']<=year_range3[1])] 
         return df
 
     time_df=filter_time3(df)
