@@ -165,15 +165,55 @@ elif graph=='pollutant change over time':
     )
     state_map
 elif graph=='Pollutants Relationship':
-    pollutant_name1=st.sidebar.selectbox(
+    pollutant1=st.sidebar.selectbox(
         'Select the first Pollutant ',
          pollutant_list, key='pollutant1')
-    pollutant_name2=st.sidebar.selectbox(
+    pollutant2=st.sidebar.selectbox(
         'Select the seconf Pollutant ',
          pollutant_list, key='pollutant2')
     states = st.sidebar.selectbox(
          'Select States ',
          state_list)
+    
+    def filter_time2(df):
+        df=df[(df['Date Local']>=year_range2[0]) & (df['Date Local']<=year_range2[1])] 
+        return df
+    
+    sub_df=df.loc[(df.State=='Texas')]
+    sub_df=sub_df[['NO2 Mean', 'SO2 Mean', 'CO Mean','O3 Mean', 'City', 'Date Local']]
+    sub_df['Year_Month']=pd.to_datetime(sub_df['Date Local']).dt.to_period('M')
+    sub_df=sub_df.groupby(['City','Year_Month']).agg('mean').reset_index()
+    sub_df['Year_Month']=pd.PeriodIndex(sub_df.Year_Month, freq='M').to_timestamp()
+    source=filter_time2(sub_df)
+    sub_df
+    pollutant1=pollutant1+' Mean'
+    pollutant2=pollutant2+' Mean'
+    
+    source=sub_df
+    brush=alt.selection(type='interval')
+    base=alt.Chart(source).add_selection(brush)
+
+    points=base.mark_point().encode(
+        x=alt.X(pollutant1, title=''),
+        y=alt.Y(pollutant2, title=''),
+        color=alt.condition(brush, 'City', alt.value('grey'))
+    )
+
+    tick_axis=alt.Axis(labels=False, domain=False, ticks=False)
+
+    x_ticks=base.mark_tick().encode(
+        alt.X(pollutant1, axis=tick_axis),
+        alt.Y('City', title='', axis=tick_axis),
+        color=alt.condition(brush, 'City', alt.value('lightgrey'))
+    )
+
+    y_ticks=base.mark_tick().encode(
+        alt.X('City', title='', axis=tick_axis),
+        alt.Y(pollutant2, axis=tick_axis),
+        color=alt.condition(brush, 'City', alt.value('lightgrey'))
+    )
+    y_ticks|(points & x_ticks)
+
 
 elif graph=='pollutants distributions':
     ## graph3
