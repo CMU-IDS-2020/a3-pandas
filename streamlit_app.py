@@ -140,9 +140,9 @@ elif graph=='pollutant change over time':
         return sub_df
 
     source=filter_time(df_state)
-    source=source.groupby('State')[all_pollutant].agg('mean').reset_index()
+    source=source.groupby('State')[pollutant].agg('mean').reset_index()
     
-    source.columns=['state']+all_pollutant
+    source.columns=['state']+pollutant
 
     cur=pd.read_csv('https://vega.github.io/vega-datasets/data/population_engineers_hurricanes.csv')
     source=cur[['state','id']].merge(source, left_on='state', right_on='state', how='left')
