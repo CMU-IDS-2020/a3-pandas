@@ -167,10 +167,10 @@ elif graph=='pollutant change over time':
 elif graph=='Pollutants Relationship':
     pollutant1=st.sidebar.selectbox(
         'Select the first Pollutant ',
-         pollutant_list, key='pollutant1')
+         pollutant_list,index=2, key='pollutant1')
     pollutant2=st.sidebar.selectbox(
         'Select the seconf Pollutant ',
-         pollutant_list, key='pollutant2')
+         pollutant_list, index=1,key='pollutant2')
     states = st.sidebar.selectbox(
          'Select States ',
          state_list)
@@ -181,7 +181,7 @@ elif graph=='Pollutants Relationship':
     def filter_time2(df):
         df=df[(df['Date Local']>=year_range2[0]) & (df['Date Local']<=year_range2[1])] 
         return df
-    
+    st.write('In this plot we analyzed the relationship between pollutants over states, and the time unit is default as months. One thing that need to be noticed is that user should choose two different pollutants')
     sub_df=df.loc[(df.State==states)]
     sub_df=sub_df[['NO2 Mean', 'SO2 Mean', 'CO Mean','O3 Mean', 'City', 'Date Local']]
     sub_df['Year_Month']=pd.to_datetime(sub_df['Date Local']).dt.to_period('M')
