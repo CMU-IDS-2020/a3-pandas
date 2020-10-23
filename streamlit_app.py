@@ -78,7 +78,7 @@ elif graph=='pollutant change over time':
     with col1:
         pass
     with col2:
-        st.markdown(f'`{str(year_range[0])[:10]}` - `{str(year_range[1])[:10]}`')
+        st.markdown(f'`{str(year_range[0]-datetime.timedelta(days=1))[:10]}` - `{str(year_range[1]-datetime.timedelta(days=1))[:10]}`')
     with col3:
         pass
     def filter_state(df_state):
@@ -191,7 +191,7 @@ elif graph=='pollutants distributions':
     with col1:
         pass
     with col2:
-        st.markdown(f'`{str(year_range2[0])[:10]}` - `{str(year_range2[1])[:10]}`')
+        st.markdown(f'`{str(year_range2[0]-datetime.timedelta(days=1))[:10]}` - `{str(year_range2[1]-datetime.timedelta(days=1))[:10]}`')
     with col3:
         pass
     region_type=st.sidebar.selectbox(
@@ -250,7 +250,7 @@ elif graph=='max hours for pollutants within a day':
     with col1:
         pass
     with col2:
-        st.markdown(f'`{str(year_range3[0])[:10]}` - `{str(year_range3[1])[:10]}`')
+        st.markdown(f'`{str(year_range3[0]-datetime.timedelta(days=1))[:10]}` - `{str(year_range3[1]-datetime.timedelta(days=1))[:10]}`')
     with col3:
         pass
     def filter_time3(df):
