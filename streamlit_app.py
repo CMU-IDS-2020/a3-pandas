@@ -132,8 +132,8 @@ elif graph=='pollutant change over time':
 #     df_state['Year']=pd.to_datetime(df_state['Date Local']).dt.to_period('Y')
     df_state['Year_Month']=pd.to_datetime(df_state['Date Local']).dt.to_period('M')
     df_state=df_state.groupby(['State','Year_Month']).agg('mean').reset_index()
-    df_state['Date Local']=pd.PeriodIndex(df_state.Year_Month, freq='M').to_timestamp()
-    df_state
+    df_state['Year_Month']=pd.PeriodIndex(df_state.Year_Month, freq='M').to_timestamp()
+    df_state.columns=['State', 'Date Local']+all_pollutant
     
     def filter_time(sub_df):
         sub_df=sub_df[(sub_df['Date Local']>=year_range[0]) & (sub_df['Date Local']<=year_range[1])] 
