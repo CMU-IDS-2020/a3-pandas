@@ -196,7 +196,7 @@ elif graph=='Pollutants Relationship':
     source=sub_df
     brush=alt.selection(type='interval')
     base=alt.Chart(source).add_selection(brush).properties(
-            width=400,
+            width=500,
             height=400
         )
 
