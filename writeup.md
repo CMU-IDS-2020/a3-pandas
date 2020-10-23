@@ -9,8 +9,8 @@ Air pollution has become a more and more serious issue. In different studies, it
 ## Project Goals
 
 TODO: **A clear description of the goals of your project.** Describe the question that you are enabling a user to answer. The question should be compelling and the solution should be focused on helping users achieve their goals. 
-
-The questions user could answer with the application including:
+The project aims to help user analyze air pollution data in U.S. from 2000 to 2016. The visualization allows flexibility of selecting different pollutant, type of measurements, time range, geographical entities, and others. Some goal for the interactive visualizations presented in the study include help user analyzing trends for different pollutants over time for different states and help identifying states, counties, and cities with serious pollution concerns. Additionally, user could select specific city, county, and state to view the max hour of pollutant measurement over selected time range.
+Below are some questions one could answer with the application:
 1. What is the trend of four differnt pollutants for different states over time?
 2. Which states have the most series problem of different air pollutants?
 3. What are the top states/ counties/ cities with most/least serious air pollutant problem?
