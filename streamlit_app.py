@@ -28,7 +28,7 @@ measurement_list={' Mean':' Mean', ' Air Quality Index (AQI)':' AQI', ' 1st Max 
 state_list=list(df.State.value_counts().index)
 
 st.sidebar.title('Tool Bar')
-graph=st.sidebar.selectbox("choose an interactive components", ['Overview','pollutant change over time','pollutants distributions','max hours for pollutants within a day'])
+graph=st.sidebar.selectbox("choose an interactive components", ['Overview','pollutant change over time','Pollutants Relationship','pollutants distributions','max hours for pollutants within a day'])
 
 
 if graph=='Overview':
@@ -164,8 +164,18 @@ elif graph=='pollutant change over time':
         height=400
     )
     state_map
+elif graph=='Pollutants Relationship':
+    pollutant_name1=st.sidebar.selectbox(
+        'Select the first Pollutant ',
+         pollutant_list, key='pollutant1')
+    pollutant_name2=st.sidebar.selectbox(
+        'Select the seconf Pollutant ',
+         pollutant_list, key='pollutant2')
+    states = st.sidebar.multiselect(
+         'Select States ',
+         state_list,
+         [state_list[0], state_list[1]])
 
-        
 elif graph=='pollutants distributions':
     ## graph3
     st.write('Now we could further investigate the cities with highest pollutants or cities with lowest pollutants')
