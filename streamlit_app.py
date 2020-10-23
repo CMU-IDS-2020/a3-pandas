@@ -60,7 +60,7 @@ elif graph=='pollutant change over time':
 
     # pollutant=pollutant_name+' AQI'
     pollutant=pollutant_name+measurement_list[measurement_name]
-
+    all_pollutant=[p+measurement_list[measurement_name] for p in pollutant_list]
 
     states = st.sidebar.multiselect(
          'Select States ',
@@ -131,8 +131,9 @@ elif graph=='pollutant change over time':
         return sub_df
 
     source=filter_time(df_state)
-    source=source.groupby('State')[pollutant].agg('mean').reset_index()
-    source.columns=['state', pollutant]
+    source=source.groupby('State')[all_pollutant].agg('mean').reset_index()
+    
+    source.columns=['state']+[all_pollutant]
 
     cur=pd.read_csv('https://vega.github.io/vega-datasets/data/population_engineers_hurricanes.csv')
     source=cur[['state','id']].merge(source, left_on='state', right_on='state', how='left')
@@ -140,6 +141,7 @@ elif graph=='pollutant change over time':
 
     highlight = alt.selection_single(on='mouseover', fields=['state'], empty='none')
     states=alt.topo_feature(data.us_10m.url, 'states')
+    ## map
     state_map=alt.Chart(states).mark_geoshape().encode(
         color=alt.condition(highlight, alt.value('yellow'), alt.Color(f'{pollutant}:Q', scale=alt.Scale(scheme='lightorange'))),
         tooltip=['state:N',f'{pollutant}:Q']
