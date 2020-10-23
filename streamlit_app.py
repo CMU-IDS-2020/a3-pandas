@@ -27,8 +27,8 @@ pollutant_list=['NO2', 'O3', 'CO', 'SO2']
 measurement_list={' Mean':' Mean', ' Air Quality Index (AQI)':' AQI', ' 1st Max Value ':' 1st Max Value'}
 state_list=list(df.State.value_counts().index)
 
-
-graph=st.sidebar.selectbox("choose a graph", ['Home & Data',1,2,3])
+st.sidebar.title('Tool Bar')
+graph=st.sidebar.selectbox("choose an interactive components", ['Home & Data',1,2,3])
 
 
 if graph=='Home & Data':
