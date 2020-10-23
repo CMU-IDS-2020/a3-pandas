@@ -28,11 +28,12 @@ The unit for measure four different polllutant NO2, SO2, CO, O3 are Parts per mi
  * 1st Max Value: The maximum value obtained for NO2 concentration in a given day
  * 1st Max Hour: The hour when the maximum NO2 concentration was recorded in a given day
 
-First interactive graph allows user to select one of the first three measurement, type of pollutant, states, a range of time, and the plotting frequency. For plotting frequency, we offer three different options, yearly, monthly, and daily. The visualization will then provide the aggregated mean of the measurement over the time range given the select plotting frequency for the selected pollutant and measurement. Different colors of line in the plot indicates different states. 
+First interactive graph allows user to select one of the first three measurement, type of pollutant, states, time period, and the plotting frequency. For plotting frequency, we offer three different options, yearly, monthly, and daily. The visualization will then provide the aggregated mean of the measurement over the time range given the select plotting frequency for the selected pollutant and measurement. Different colors of line in the plot indicates different states. 
 
-The second visualization is a map that contains the mean of the measurement of the selected pollutant for all the states, a highligher is added to allow user view the detailed value for different states. 
+The second visualization is a continuation from the first plot: a map that contains the mean of the measurement of the selected pollutant for all the states over the selected period of time, a highligher is added to allow user view the detailed value for different states. 
 
-The third visualization intend to allow user explore which states, counties and cities are the highest or lowest measurements for different pollutant. This visual component allow user to choose different geographic entities (state, county, city) and the top N entities with either highest or lowest mean measurements for the selected pollutant. The geographic entities are then sorted by the mean 1st Max Value of the selected pollutant. 
+The third visualization intend to allow user explore which states, counties and cities have the highest or lowest measurements for different pollutants. This visual component allow user to choose different geographic entities (state, county, city), the number of entities to show, and the option of plotting highest or lowest mean measurements for the selected pollutant. Three measurements, mean, AQI, and 1st max value, are presented as bars in the graph with different colors. The y-axis indicating the top N geographic entities given the plotting criterias. Moreoever, the geographic entities are then sorted by the mean of the 1st Max Values of the selected pollutant for different geographic entities.
+
 
 
 
