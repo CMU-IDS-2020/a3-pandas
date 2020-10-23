@@ -171,10 +171,9 @@ elif graph=='Pollutants Relationship':
     pollutant_name2=st.sidebar.selectbox(
         'Select the seconf Pollutant ',
          pollutant_list, key='pollutant2')
-    states = st.sidebar.multiselect(
+    states = st.sidebar.selectbox(
          'Select States ',
-         state_list,
-         [state_list[0], state_list[1]])
+         state_list)
 
 elif graph=='pollutants distributions':
     ## graph3
